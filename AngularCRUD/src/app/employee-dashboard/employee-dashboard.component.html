@@ -1,0 +1,90 @@
+
+<nav class="navbar nav-light bg-primary">
+   
+
+    <div class="container-fluid">
+        <h1 style="color:aliceblue">Angular CRUID</h1>
+       <div class="d-flex">
+           <button class="btn btn-success" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Add Employee</button>
+       </div>
+    </div>
+</nav>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col">Employe ID</th>
+            <th scope="col">First Nmae</th>
+            <th scope="col">Last Nmae</th>
+            <th scope="col">Email ID</th>
+            <th scope="col">Mobile No</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of employeeData">
+            <td>{{row.id}}</td>
+            <td>{{row.firstName}}</td>
+            <td>{{row.lastName}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobileNo}}</td>
+            <td>{{row.salary}}</td>
+            <td>
+                <button class="btn btn-success" (click)="onEdit(row)" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Edit</button>
+                <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+
+            
+        </tr>
+    </tbody>
+</table>
+
+
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+          <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formvalues">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1">First Name</label>
+                  <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="emailHelp" placeholder="First Name">
+                 
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Enter email">
+                   
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1">Mobile No</label>
+                    <input type="text" class="form-control" id="mobileNo" formControlName="mobileNo" placeholder="+ 91">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1">Salary</label>
+                    <input type="text" class="form-control" id="salary" formControlName="salary" placeholder="Salary">
+                  </div>
+
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="resetvalues()" id="cancel" data-bs-dismiss="modal">Close</button>
+          <button type="button" [disabled]="!formvalues.valid" (click)="Postmployeedetails()" class="btn btn-primary">Add</button>
+          <button type="button" [disabled]="!formvalues.valid" (click)="updateployeedetails()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

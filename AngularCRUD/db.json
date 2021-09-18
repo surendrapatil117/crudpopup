@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "firstName": "Dhanashree",
+      "lastName": "Patil",
+      "email": "dhanashre.dp.091@gmail.com",
+      "mobileNo": "9988765434",
+      "salary": "40000"
+    },
+    {
+      "id": 4,
+      "firstName": "Surendra",
+      "lastName": "Patil",
+      "email": "surendrapatil117@gmail.com",
+      "mobileNo": "9876765456",
+      "salary": "100000"
+    },
+    {
+      "id": 5,
+      "firstName": "Sachin",
+      "lastName": "Tendulkar",
+      "email": "sachinetendulkar33@gmail.com",
+      "mobileNo": "9922736068",
+      "salary": "3453455"
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
