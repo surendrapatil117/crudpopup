@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ApiService} from './shared/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './demo/demo.component';
+import { FormsModule } from '@angular/forms';
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,10 @@ import { DemoComponent } from './demo/demo.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
+    
     
   ],
   providers: [ApiService],

@@ -50,4 +50,96 @@
       
     </div>
     <p>-------------ngSwitch on simple array end--------------------</p>  
+
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <form>
+          <div class="form-group">
+            <label for="dateOfBirth">Date of birth</label>
+            <div class="input-group">
+           <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+           <div class="form-group">
+            <div class="input-group">
+                     <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                    </div>
+            </div>
+          </div>
+            
+            </div>
+          </div>
+        </form> -->
+
+
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </div>
+    </ng-template>
     
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+    
+    <hr>
+    
+    <pre>{{ closeResult }}</pre>
+
+    <ngb-toast *ngIf="show" [autohide]="false" (hidden)="show=false">
+      <ng-template ngbToastHeader>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+          <path
+            d="M16.896 10l-4.896-8-4.896 8-7.104-4 3 11v5h18v-5l3-11-7.104 4zm-11.896 10v-2h14v2h-14zm14.2-4h-14.4l-1.612-5.909 4.615 2.598 4.197-6.857 4.197 6.857 4.615-2.598-1.612 5.909z" />
+        </svg>
+        <strong class="mx-1">Fancy</strong>header here
+      </ng-template>
+      Hello, I am toast. Have you noticed my header has been generated from a Template?
+    </ngb-toast>
+
+    <div class="btn-group btn-group-toggle">
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" ngbButton [(ngModel)]="modela.left"> Left (pre-checked)
+      </label>
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" ngbButton [(ngModel)]="modela.middle"> Middle
+      </label>
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" ngbButton [(ngModel)]="modela.right"> Right
+      </label>
+    </div>
+    <hr>
+    <pre>{{model | json}}</pre>
+
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem>
+        <a ngbNavLink>First</a>
+        <ng-template ngbNavContent>First content</ng-template>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink>Second</a>
+        <ng-template ngbNavContent>Second content</ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+
+    <ngb-rating [(rate)]="currentRate"></ngb-rating>
+<hr>
+<pre>Rate: <b>{{currentRate}}</b></pre>
+
+
+<p>----------ngx-bootstrap start</p>
