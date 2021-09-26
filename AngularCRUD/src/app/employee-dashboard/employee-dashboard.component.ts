@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import{FormGroup,FormBuilder, Validators, EmailValidator} from '@angular/forms';
-import{EmployeeModel} from './employee-model';
-import{ApiService} from '../shared/api.service';
+import { Component, OnInit ,ViewChild} from '@angular/core';
+import {FormGroup,FormBuilder, Validators, EmailValidator} from '@angular/forms';
+import {EmployeeModel} from './employee-model';
+import {ApiService} from '../shared/api.service';
+import { Observable } from 'rxjs';
+import {AgGridAngular} from 'ag-grid-angular';
+import { GridOptions } from 'ag-grid-community';
+import { BtnCellRendererComponent } from '../btn-cell-renderer/btn-cell-renderer.component';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';  
+
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -9,14 +15,65 @@ import{ApiService} from '../shared/api.service';
   styleUrls: ['./employee-dashboard.component.css']
 })
 export class EmployeeDashboardComponent implements OnInit {
+  @ViewChild('agGrid') agGrid: AgGridAngular;
   formvalues !:FormGroup;
   employeeData!:any;
   employeemodelObjct:EmployeeModel=new EmployeeModel();
+  gridOptions: GridOptions;
+  private gridApi;
+  private gridColumnApi;
+  closeResult: string;
+//   columnDefs=[
+//  {
+//     field:'firstName'
+
+//  }
+//  ];
+
+// columnDefs = [
+//   { field: 'make' },
+//   { field: 'model' },
+//   { field: 'price'}
+// ];
+
+// rowData = [
+//   { make: 'Toyota', model: 'Celica', price: 35000 },
+//   { make: 'Ford', model: 'Mondeo', price: 32000 },
+//   { make: 'Porsche', model: 'Boxter', price: 72000 }
+// ];
 
 
-  constructor(private formbulder:FormBuilder,private Api:ApiService) { }
+columnDefs = [
+  {headerName:"Employe ID", field: 'id',filter:true,checkboxSelection: true },
+  {headerName:"First Name",field: 'firstName',filter:true},
+  {headerName:"Last Name",field: 'lastName' ,filter:true},
+  {headerName:"Email ID",field: 'email',editable:true,filter:true},
+  {headerName:"Mobile No",field: 'mobileNo' ,filter:true},
+  {headerName:"Salary",field: 'salary' ,filter:true},
+  {headerName:"Action",field:'id',cellRendererFramework:BtnCellRendererComponent},
+ 
+  // {headerName: "Actions", cellRendererSelector: 
+  //            '<div class="grid-action-cell">'+
+  //            '<a ng-click="deleteThisRow(row.entity);" >Delete</a></div>'}
+  //checkboxSelection: true
+  
+];
+
+
+
+rowData = new Observable<any[]>();
+
+ 
+
+
+
+
+  constructor(private formbulder:FormBuilder,private Api:ApiService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
+
+   
+  
     this.formvalues=this.formbulder.group({
       firstName:['', Validators.required],
       lastName:['',Validators.required],
@@ -54,8 +111,15 @@ export class EmployeeDashboardComponent implements OnInit {
 
   getAllEmploayee()
   {
+    
     this.Api.getAllEmploayee().subscribe(res=>{
-    this.employeeData=res;
+   // this.employeeData=res;
+   console.log(res);
+   this.rowData=res;
+   //this.rowData.push(res);
+   
+   //this.rowData.api.setRowData(res);
+
     },err=>{
       alert('Somethinmg went wrong')
    
@@ -108,5 +172,61 @@ export class EmployeeDashboardComponent implements OnInit {
     this.formvalues.reset();
   }
 
+  getSelectedRows(): void {
+         const selectedNodes = this.agGrid.api.getSelectedNodes();
+        
+          const selectedData = selectedNodes.map(node => node.data);
+          console.log(selectedData);
+          const selectedDataStringPresentation = selectedData.map(node => `${node.firstName} ${node.email}`).join(', ');
+    
+          alert(`Selected nodes: ${selectedDataStringPresentation}`);
 
+
+         
+
+      }
+
+      onGridReady(params)
+      {
+        console.log('onGridReady');
+        console.log(params);
+        this.agGrid=params.api;
+        this.gridColumnApi=params.columnApi;
+
+      
+
+      }
+
+      open(content, videoId) {  
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
+          this.closeResult = `Closed with: ${result}`;  
+          if (result === 'yes') {  
+            this.deleteHero(videoId);  
+          }  
+        }, (reason) => {  
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+        });  
+      } 
+
+      deleteHero(id)
+      {
+        console.log('deleteHero')
+
+      }
+      getDismissReason(resion)
+      {
+        console.log('getDismissReason')
+      }
+      
+      // private getDismissReason(reason: any): string {  
+      //   if (reason === ModalDismissReasons.ESC) {  
+      //     return 'by pressing ESC';  
+      //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {  
+      //     return 'by clicking on a backdrop';  
+      //   } else {  
+      //     return `with: ${reason}`;  
+      //   }  
+      // }  
+
+     
 }

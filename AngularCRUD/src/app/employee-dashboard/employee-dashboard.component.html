@@ -3,9 +3,9 @@
    
 
     <div class="container-fluid">
-        <h1 style="color:aliceblue">Angular CRUID</h1>
+        <h1 style="color:aliceblue">Angular CRUID </h1>
        <div class="d-flex">
-           <button class="btn btn-success" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Add Employee</button>
+           <button class="btn btn-success" data-bs-target="#exampleModal" (click)="open(content,233)" data-bs-toggle="modal" >Add Employee</button>
        </div>
     </div>
 </nav>
@@ -38,10 +38,18 @@
         </tr>
     </tbody>
 </table>
+<div class="fluid">
 
-
-
-  <!-- Modal -->
+<button  (click)="getSelectedRows()" class="btn btn-success customebtn">Edit</button>
+<button (click)="getSelectedRows()" class="btn  btn-danger customebtn">Delete</button>
+ <ag-grid-angular #agGrid  
+    style="width: 90%; height: 500px;"
+    class="ag-theme-alpine"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs">
+</ag-grid-angular>
+</div>
+  <!-- Modal  rowSelection="multiple" -->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -88,3 +96,18 @@
     </div>
   </div>
 
+  <ng-template #content let-c="close" let-d="dismiss">    
+    <div class="modal-header">    
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+            <span aria-hidden="true">×</span>    
+        </button>    
+    </div>    
+    <div class="modal-body">    
+        <p>Are you sure to delete this?</p>    
+    </div>    
+    <div class="modal-footer">    
+        <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>    
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>    
+    </div>    
+</ng-template>     

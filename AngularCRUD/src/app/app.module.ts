@@ -10,12 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './demo/demo.component';
 import { FormsModule } from '@angular/forms';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AgGridModule} from 'ag-grid-angular';
+import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeDashboardComponent,
     DemoComponent
+    
+
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,7 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    AgGridModule.withComponents([BtnCellRendererComponent])
     
     
   ],
