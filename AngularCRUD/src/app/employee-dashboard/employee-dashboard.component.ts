@@ -23,6 +23,7 @@ export class EmployeeDashboardComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   closeResult: string;
+  public empname:string;
 //   columnDefs=[
 //  {
 //     field:'firstName'
@@ -59,9 +60,25 @@ columnDefs = [
   
 ];
 
+data=[
+  {
+    name:'surendra',
+    email:'surendrapatil117@gmail.com',
+    mobno:'0987656545'
+  },
+  {
+    name:'sdgvdfg',
+    email:'dsfgvdfvdf117@gmail.com',
+    mobno:'3464556545'
+  }
+
+];
 
 
-rowData = new Observable<any[]>();
+
+
+//rowData = new Observable<any[]>();
+rowData:any;
 
  
 
@@ -72,7 +89,7 @@ rowData = new Observable<any[]>();
 
   ngOnInit(): void {
 
-   
+   this.empname="surendra";
   
     this.formvalues=this.formbulder.group({
       firstName:['', Validators.required],
@@ -93,6 +110,7 @@ rowData = new Observable<any[]>();
     this.employeemodelObjct.email=this.formvalues.value.email;
     this.employeemodelObjct.salary=this.formvalues.value.salary;
     this.employeemodelObjct.mobileNo=this.formvalues.value.mobileNo;
+
  this.Api.postEmploayee(this.employeemodelObjct).subscribe(res=>{
    console.log(res)
    alert('Employee Added Successfully');
@@ -116,6 +134,7 @@ rowData = new Observable<any[]>();
    // this.employeeData=res;
    console.log(res);
    this.rowData=res;
+   this.employeeData=res;
    //this.rowData.push(res);
    
    //this.rowData.api.setRowData(res);
@@ -129,10 +148,14 @@ rowData = new Observable<any[]>();
 
   deleteEmployee(row:any)
   {
-    this.Api.deleteemployee(row.id).subscribe(res=>{
-      alert('Employeee has been deleted successfully');
-      this.getAllEmploayee();
-    })
+    
+   // this.oopen("confirmcontent",row);
+   this.Api.deleteemployee(row.id).subscribe(res=>{
+    alert('Employeee has been deleted successfully');
+    this.getAllEmploayee();
+  })
+
+   
 
   }
 
@@ -197,14 +220,22 @@ rowData = new Observable<any[]>();
 
       }
 
-      open(content, videoId) {  
+      oopen(content,row) {  
+
+        console.log('inside oopen'+content);
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
           this.closeResult = `Closed with: ${result}`;  
           if (result === 'yes') {  
-            this.deleteHero(videoId);  
+            this.Api.deleteemployee(row.id).subscribe(res=>{
+             // alert('Employeee has been deleted successfully');
+              this.getAllEmploayee();
+            })
+          
+           
           }  
         }, (reason) => {  
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;  
+          console.log(reason);
         });  
       } 
 

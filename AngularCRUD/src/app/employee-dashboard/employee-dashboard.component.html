@@ -5,11 +5,12 @@
     <div class="container-fluid">
         <h1 style="color:aliceblue">Angular CRUID </h1>
        <div class="d-flex">
-           <button class="btn btn-success" data-bs-target="#exampleModal" (click)="open(content,233)" data-bs-toggle="modal" >Add Employee</button>
+           <button class="btn btn-success" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Add Employee</button>
        </div>
     </div>
 </nav>
-<table class="table mt-3">
+<div class="container">
+  <table class="table mt-3">
     <thead>
         <tr>
             <th scope="col">Employe ID</th>
@@ -30,25 +31,42 @@
             <td>{{row.mobileNo}}</td>
             <td>{{row.salary}}</td>
             <td>
-                <button class="btn btn-success" (click)="onEdit(row)" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Edit</button>
-                <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button>
-            </td>
+                <button class="btn btn-success" (click)=" onEdit(row)" data-bs-target="#exampleModal"  data-bs-toggle="modal" >Edit</button>
+                <!-- <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button> -->
+                <button (click)="oopen(content,row)" class="btn btn-danger mx-3">Delete</button>
+              </td>
 
             
         </tr>
     </tbody>
 </table>
-<div class="fluid">
 
-<button  (click)="getSelectedRows()" class="btn btn-success customebtn">Edit</button>
-<button (click)="getSelectedRows()" class="btn  btn-danger customebtn">Delete</button>
- <ag-grid-angular #agGrid  
-    style="width: 90%; height: 500px;"
+
+<ag-grid-angular #agGrid  
+    style="width: 100%;height:200px;"
     class="ag-theme-alpine"
     [rowData]="rowData" 
     [columnDefs]="columnDefs">
 </ag-grid-angular>
+
+<button  (click)="getSelectedRows()" class="btn btn-success customebtn">Edit</button>
+<button (click)="getSelectedRows()" class="btn  btn-danger customebtn">Delete</button>
+
+<br><br>
+<div>
+  <app-employee [empnamepar]="empname" [rowData]="rowData" [mydata]="data" ></app-employee>
 </div>
+</div>
+
+
+<!-- Clield component employee start-->
+<!-- <div *ngFor="let row of rowData">
+  <app-employee [empnamepar]="empname" [rowData]="row" [mydata]="data" ></app-employee>
+</div> -->
+
+
+
+<!-- Clield component employee end-->
   <!-- Modal  rowSelection="multiple" -->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

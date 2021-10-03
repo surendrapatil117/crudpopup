@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AgGridModule} from 'ag-grid-angular';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeDashboardComponent,
-    DemoComponent
+    DemoComponent,
+    EmployeeComponent
     
 
   ],
