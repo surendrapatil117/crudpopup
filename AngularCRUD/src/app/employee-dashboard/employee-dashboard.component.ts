@@ -220,14 +220,13 @@ rowData:any;
 
       }
 
-      oopen(content,row) {  
-
+      oopen(content,row) { 
         console.log('inside oopen'+content);
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
           this.closeResult = `Closed with: ${result}`;  
           if (result === 'yes') {  
             this.Api.deleteemployee(row.id).subscribe(res=>{
-             // alert('Employeee has been deleted successfully');
+            
               this.getAllEmploayee();
             })
           
