@@ -15,6 +15,7 @@ import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.
 import { EmployeeComponent } from './employee/employee.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { HelloComponent } from './shared/hello.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HelloComponent } from './shared/hello.component';
     DemoComponent,
     EmployeeComponent,
     CountdownComponent,
-    HelloComponent 
+    HelloComponent,
+    NavBarComponent 
     
 
   ],

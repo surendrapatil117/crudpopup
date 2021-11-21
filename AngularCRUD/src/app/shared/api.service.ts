@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import{HttpClient} from '@angular/common/http';
 import{map}from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  public content = new BehaviorSubject<boolean>(false);    
+  public share = this.content.asObservable();    
 
   constructor(private http:HttpClient) { }
 
@@ -40,5 +44,22 @@ export class ApiService {
     pipe(map(res=>{
       return res;
     }))
+  }
+
+   validatejwttoken():boolean
+  {
+   
+   // console.log(localStorage.getItem('bearer-token'));
+    if(localStorage.getItem('bearer-token')!=null)
+    {
+      console.log('returning false');
+      return false;
+     
+    }
+    else{
+      console.log('returning true');
+      return true;
+    }
+   
   }
 }

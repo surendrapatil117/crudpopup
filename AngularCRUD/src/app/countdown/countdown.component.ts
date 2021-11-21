@@ -1,4 +1,5 @@
-import { Component, OnInit,VERSION } from '@angular/core';
+import { Component, OnInit,VERSION, Output, EventEmitter } from '@angular/core';
+import{ApiService} from '../shared/api.service'
 
 @Component({
   selector: 'app-countdown',
@@ -8,8 +9,10 @@ import { Component, OnInit,VERSION } from '@angular/core';
 export class CountdownComponent implements OnInit {
   name = "Angular " + VERSION.major;
   display: any;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+  istokenvalid: boolean;
 
-  constructor() {
+  constructor( private apiservice:ApiService) {
     this.timer(5);
    }
 
@@ -41,5 +44,16 @@ export class CountdownComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  sendNotification() {
+    this.notifyParent.emit('Some value to send to the parent');
+}
+hidenavbar()
+{
+  localStorage.removeItem('bearer-token');
+  this.istokenvalid=this.apiservice.validatejwttoken();
+  console.log(this.istokenvalid);
+this.apiservice.content.next(this.istokenvalid);
+
+}
 
 }
