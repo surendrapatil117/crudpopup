@@ -13,13 +13,17 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AgGridModule} from 'ag-grid-angular';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { CountdownComponent } from './countdown/countdown.component';
+import { HelloComponent } from './shared/hello.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeDashboardComponent,
     DemoComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    CountdownComponent,
+    HelloComponent 
     
 
   ],
