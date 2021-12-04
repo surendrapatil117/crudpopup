@@ -16,6 +16,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { HelloComponent } from './shared/hello.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RxjstestComponent } from './rxjstest/rxjstest.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     EmployeeComponent,
     CountdownComponent,
     HelloComponent,
-    NavBarComponent 
+    NavBarComponent,
+    RxjstestComponent 
     
 
   ],
