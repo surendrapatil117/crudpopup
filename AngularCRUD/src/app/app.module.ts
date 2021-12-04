@@ -17,6 +17,7 @@ import { CountdownComponent } from './countdown/countdown.component';
 import { HelloComponent } from './shared/hello.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RxjstestComponent } from './rxjstest/rxjstest.component';
+import { PushNotificationComponent } from './push-notification/push-notification.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RxjstestComponent } from './rxjstest/rxjstest.component';
     CountdownComponent,
     HelloComponent,
     NavBarComponent,
-    RxjstestComponent 
+    RxjstestComponent,
+    PushNotificationComponent 
     
 
   ],

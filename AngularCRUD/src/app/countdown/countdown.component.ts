@@ -1,5 +1,6 @@
 import { Component, OnInit,VERSION, Output, EventEmitter } from '@angular/core';
 import{ApiService} from '../shared/api.service'
+import { PushnotificationService } from '../shared/pushnotification.service';
 
 @Component({
   selector: 'app-countdown',
@@ -12,8 +13,10 @@ export class CountdownComponent implements OnInit {
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   istokenvalid: boolean;
 
-  constructor( private apiservice:ApiService) {
-    this.timer(5);
+  constructor( private apiservice:ApiService,private pushnotification:PushnotificationService) {
+    this.pushnotification.requestPermission();
+
+    this.timer(1);
    }
 
    timer(minute) {
@@ -37,6 +40,8 @@ export class CountdownComponent implements OnInit {
 
       if (seconds == 0) {
         console.log("finished");
+
+        this.notify();
         clearInterval(timer);
       }
     }, 1000);
@@ -54,6 +59,18 @@ hidenavbar()
   console.log(this.istokenvalid);
 this.apiservice.content.next(this.istokenvalid);
 
+}
+notify() {
+  let data: Array < any >= [];
+  data.push({
+      'title': 'Seesion will expire Soon',
+      'alertContent': 'Action required ,your session will timeout shortly..'
+  });
+  data.push({
+      'title': 'Seesion will expire Soon',
+      'alertContent': 'Session is being timeout,click on Continue/Logout'
+  });
+  this.pushnotification.generateNotification(data);
 }
 
 }
